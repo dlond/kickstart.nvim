@@ -352,7 +352,11 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -915,6 +919,9 @@ require('lazy').setup({
     },
   },
 })
+
+local completion = require 'custom.toggle-path-cmp'
+vim.keymap.set('n', '<leader>tp', completion.toggle_path_completion, { desc = '[T]oggle [p]ath autocompletion' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
